@@ -1,5 +1,5 @@
-import { Module } from "@nestjs/common";
-import { importAllFromRequireContext } from "src/Helpers/Utils/RequireContext";
+import { Module } from '@nestjs/common';
+import { importAllFromRequireContext } from 'src/Helpers/Utils/RequireContext';
 
 @Module({
     imports: [],
@@ -10,4 +10,4 @@ import { importAllFromRequireContext } from "src/Helpers/Utils/RequireContext";
     controllers: importAllFromRequireContext(require.context('../Controllers/', true)),
     exports: [],
 })
-export class ApplicationModule { }
+export class ApplicationModule {}
