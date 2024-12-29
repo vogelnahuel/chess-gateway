@@ -1,16 +1,17 @@
-import { AxiosWebServices } from './AxiosWebServices';
+import { GrpcWebServices } from './GrpcWebService';
 
-export class AuthWebService extends AxiosWebServices {
-    // Configurar a caso de uso.
+export class AuthWebService extends GrpcWebServices {
+    constructor() {
+        super('auth.proto', 'AuthService', process.env.AUTH_GRPC_URL || 'localhost:50051');
+    }
+
     async login(email: string, password: string): Promise<any> {
-        const url: string = `${process.env.URL_CORE}`;
-        const body = {
-            email,
-            password,
-        };
-        const headers = this.buildDefaultConfig();
-        const config = this.buildAxiosRequestConfig({ ...headers });
-        const response = await this.post(url, body, config);
-        return response;
+        const payload = { email, password };
+        return this.call<any, typeof payload>('Login', payload);
+    }
+
+    async validateToken(token: string): Promise<any> {
+        const payload = { token };
+        return this.call<any, typeof payload>('ValidateToken', payload);
     }
 }
