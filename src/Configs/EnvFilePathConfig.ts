@@ -1,9 +1,9 @@
 import EnumEnv from './EnumEnv';
 
 export const envFilePathConfiguration = (): string => {
-    console.log(`Entorno - ${process.env.SEED_ENV}`);
+    console.log(`Entorno - ${process.env.CHESS_MS}`);
     let envFilePath;
-    switch (process.env.SEED_ENV) {
+    switch (process.env.CHESS_MS) {
         case EnumEnv.LOCAL:
             envFilePath = '.env.local';
             break;
