@@ -6,7 +6,7 @@ export abstract class GrpcWebServices {
     private client: any;
 
     createGrpcClientWebService(protoFileName: string, serviceName: string, address: string): any {
-        return createGrpcClient(protoFileName, serviceName, address);
+        this.client = createGrpcClient(protoFileName, serviceName, address);
     }
 
     protected async call<R = any, P = any>(method: string, payload: P): Promise<R> {

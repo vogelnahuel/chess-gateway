@@ -1,4 +1,3 @@
-// src/Helpers/GrpcClient.ts
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import { join } from 'path';
@@ -15,7 +14,6 @@ export function createGrpcClient(protoFileName: string, serviceName: string, add
     }
 
     const protoPath = join(__dirname, '../Protos', protoFileName);
-    console.log('protoPath', protoPath);
     const packageDefinition = protoLoader.loadSync(protoPath, {
         keepCase: true,
         longs: String,
@@ -25,9 +23,8 @@ export function createGrpcClient(protoFileName: string, serviceName: string, add
     });
 
     const proto = grpc.loadPackageDefinition(packageDefinition) as any;
-    const Service = proto[serviceName];
 
-    console.log('Service', Service);
+    const Service = proto.user?.[serviceName]; // Access service using proto.user[serviceName]
 
     if (!Service) {
         throw new Error(`Service ${serviceName} not found in proto file.`);
