@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import Response from 'src/Helpers/Formatter/Response';
-import UserRequest from 'src/Models/Request/UserRequest';
+import CreateUserDto from 'src/Models/Request/UserRequest';
 import ExampleResponse from 'src/Models/Response/ExampleResponse';
 import { UserService } from 'src/Services/UserService';
 
@@ -11,7 +11,7 @@ export class UserController {
 
     @Post()
     @HttpCode(HttpStatus.OK)
-    async getPong(@Body() body: UserRequest): Promise<Response<ExampleResponse>> {
+    async getPong(@Body() body: CreateUserDto): Promise<Response<ExampleResponse>> {
         return this._userService.create(body);
     }
 }

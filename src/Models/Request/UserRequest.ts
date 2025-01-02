@@ -1,6 +1,6 @@
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
-export default class ExampleRequest {
+export default class CreateUserDto {
     @IsNotEmpty()
     @IsString()
     name: string;

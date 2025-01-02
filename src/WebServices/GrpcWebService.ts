@@ -6,7 +6,7 @@ export abstract class GrpcWebServices {
     private _client: any;
 
     constructor(protoFileName: string, serviceName: string, address: string) {
-        const protoPath = join(__dirname, '../protos', protoFileName);
+        const protoPath = join(__dirname, '../Protos', protoFileName);
         const packageDefinition = protoLoader.loadSync(protoPath, {
             keepCase: true,
             longs: String,
