@@ -18,7 +18,7 @@ async function bootstrap() {
 
     app.use(BodyParser.json());
     app.use(BodyParser.urlencoded({ extended: true }));
-    app.setGlobalPrefix('api/v1/ms-seed');
+    app.setGlobalPrefix('api/v1/chess-gateway');
     app.enableCors();
     await app.listen(configService.get<string>('PORT'));
 }
