@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package review;
+
+service ReviewService {
+  rpc CreateReview (CreateReviewRequest) returns (CreateReviewResponse);
+  rpc GetReview (GetReviewRequest) returns (GetReviewResponse);
+  rpc UpdateReview (UpdateReviewRequest) returns (UpdateReviewResponse);
+  rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewResponse);
+  rpc ListReviews (ListReviewsRequest) returns (ListReviewsResponse);
+}
+
+message CreateReviewRequest {
+  int32 rating = 1;
+  string comment = 2;
+  int32 user_id = 3;
+  string club_id = 4; // UUID del Club relacionado
+}
+
+message CreateReviewResponse {
+  string message = 1;
+  Review review = 2;
+}
+
+message GetReviewRequest {
+  string id = 1; // UUID del Review
+}
+
+message GetReviewResponse {
+  Review review = 1;
+}
+
+message UpdateReviewRequest {
+  string id = 1; // UUID del Review
+  int32 rating = 2;
+  string comment = 3;
+  int32 user_id = 4;
+  string club_id = 5;
+}
+
+message UpdateReviewResponse {
+  string message = 1;
+  Review review = 2;
+}
+
+message DeleteReviewRequest {
+  string id = 1; // UUID del Review
+}
+
+message DeleteReviewResponse {
+  string message = 1;
+}
+
+message ListReviewsRequest {
+  string club_id = 1; // Para filtrar por Club
+}
+
+message ListReviewsResponse {
+  repeated Review reviews = 1;
+}
+
+message Review {
+  string id = 1; // UUID del Review
+  int32 rating = 2;
+  string comment = 3;
+  int32 user_id = 4;
+  string club_id = 5;
+  string created_at = 6; // Timestamp en formato ISO8601
+}
