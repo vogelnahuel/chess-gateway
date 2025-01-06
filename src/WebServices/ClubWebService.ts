@@ -1,17 +1,28 @@
-import { AmqpWebServices } from './AmqpWebService';
+import { Injectable } from '@nestjs/common';
+import CreateClubRequest from 'src/Models/Request/ClubRequest';
+import { GrpcWebServices } from './GrpcWebService';
 
-export class ClubsWebService extends AmqpWebServices {
-    constructor() {
-        super('clubs_queue');
+@Injectable()
+export class ClubWebService extends GrpcWebServices {
+    private readonly serviceName = 'ClubService';
+
+    async createClub(data: CreateClubRequest): Promise<any> {
+        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
+        return this.call<any, CreateClubRequest>('CreateClub', data);
     }
 
-    async sendMediaUploadRequest(data: { userId: string; mediaUrl: string }): Promise<void> {
-        await this.connect();
-        await this.sendMessage(data);
+    async getClub(id: string): Promise<any> {
+        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
+        return this.call<any, { id: string }>('GetClub', { id });
     }
 
-    async onMediaProcessed(callback: (data: { userId: string; status: string }) => void): Promise<void> {
-        await this.connect();
-        await this.consumeMessage(callback);
+    async listClubs(city?: string, province?: string): Promise<any[]> {
+        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
+        return this.call<any, { city?: string; province?: string }>('ListClubs', { city, province });
+    }
+
+    async deleteClub(id: string): Promise<any> {
+        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
+        return this.call<any, { id: string }>('DeleteClub', { id });
     }
 }
