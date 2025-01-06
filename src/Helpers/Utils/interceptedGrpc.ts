@@ -2,6 +2,17 @@ import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import { join } from 'path';
 
+// Función para encontrar el servicio en cualquier paquete del proto
+function findService(proto: any, serviceName: string): any {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const packageName in proto) {
+        if (proto[packageName]?.[serviceName]) {
+            return proto[packageName][serviceName];
+        }
+    }
+    return null;
+}
+
 export function createGrpcClient(protoFileName: string, serviceName: string, address: string): any {
     if (!protoFileName || typeof protoFileName !== 'string') {
         throw new Error('Invalid protoFileName: Must be a non-empty string.');
@@ -24,7 +35,8 @@ export function createGrpcClient(protoFileName: string, serviceName: string, add
 
     const proto = grpc.loadPackageDefinition(packageDefinition) as any;
 
-    const Service = proto.user?.[serviceName]; // Access service using proto.user[serviceName]
+    // Busca el servicio dentro de todos los paquetes dinámicamente
+    const Service = findService(proto, serviceName);
 
     if (!Service) {
         throw new Error(`Service ${serviceName} not found in proto file.`);

@@ -11,7 +11,7 @@ export class UserController {
 
     @Post()
     @HttpCode(HttpStatus.OK)
-    async getPong(@Body() body: CreateUserDto): Promise<Response<ExampleResponse>> {
+    async create(@Body() body: CreateUserDto): Promise<Response<ExampleResponse>> {
         return this._userService.create(body);
     }
 }
