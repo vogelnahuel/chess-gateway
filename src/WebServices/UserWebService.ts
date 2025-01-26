@@ -1,19 +1,41 @@
 import CreateUserDto, { RegisterDto, RegisterMediaDto } from 'src/Models/Request/UserRequest';
+import { BadGatewayException } from '@nestjs/common';
 import { GrpcWebServices } from './GrpcWebService';
 
 export class UserWebService extends GrpcWebServices {
     async createUser(data: CreateUserDto): Promise<any> {
-        this.createGrpcClientWebService('User.proto', 'UserService', process.env.AUTH_GRPC_URL || 'localhost:50051');
-        return this.call<any, typeof data>('CreateUser', data);
+        let result = null;
+        try {
+            this.createGrpcClientWebService('User.proto', 'UserService', process.env.AUTH_GRPC_URL || 'localhost:50051');
+
+            result = await this.call('CreateUser', data);
+        } catch (error) {
+            throw new BadGatewayException(error);
+        }
+        return result;
     }
 
     async registerUser(data: RegisterDto): Promise<any> {
-        this.createGrpcClientWebService('User.proto', 'UserService', process.env.AUTH_GRPC_URL || 'localhost:50051');
-        return this.call<any, typeof data>('RegisterUser', data);
+        let result = null;
+
+        try {
+            this.createGrpcClientWebService('User.proto', 'UserService', process.env.AUTH_GRPC_URL || 'localhost:50051');
+            result = this.call<any, typeof data>('RegisterUser', data);
+        } catch (error) {
+            throw new BadGatewayException(error);
+        }
+        return result;
     }
 
     async registerMediaUser(data: RegisterMediaDto): Promise<any> {
-        this.createGrpcClientWebService('User.proto', 'UserService', process.env.AUTH_GRPC_URL || 'localhost:50051');
-        return this.call<any, typeof data>('RegisterMediaUser', data);
+        let result = null;
+
+        try {
+            this.createGrpcClientWebService('User.proto', 'UserService', process.env.AUTH_GRPC_URL || 'localhost:50051');
+            result = this.call<any, typeof data>('RegisterMediaUser', data);
+        } catch (error) {
+            throw new BadGatewayException(error);
+        }
+        return result;
     }
 }
