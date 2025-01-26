@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import CreateUserDto from 'src/Models/Request/UserRequest';
+import CreateUserDto, { RegisterDto, RegisterMediaDto } from 'src/Models/Request/UserRequest';
 import { UserWebService } from 'src/WebServices/UserWebService';
 
 @Injectable()
@@ -9,5 +9,13 @@ export class UserService {
 
     async create(body: CreateUserDto) {
         return this._userWebService.createUser(body);
+    }
+
+    async register(body: RegisterDto) {
+        return this._userWebService.registerUser(body);
+    }
+
+    async registerMedia(body: RegisterMediaDto) {
+        return this._userWebService.registerMediaUser(body);
     }
 }

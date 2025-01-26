@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 export default class CreateUserDto {
@@ -38,4 +39,32 @@ export default class CreateUserDto {
 
     @IsString()
     expire_verification_code: string;
+}
+
+export class RegisterDto {
+    @IsNotEmpty()
+    @IsString()
+    email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    password: string;
+}
+
+export class RegisterMediaDto {
+    @IsNotEmpty()
+    @IsString()
+    email: string;
+
+    @IsNotEmpty()
+    picture: string;
+
+    @IsNotEmpty()
+    given_name: string;
+
+    @IsNotEmpty()
+    family_name: string;
+
+    @IsNotEmpty()
+    sub: string;
 }
