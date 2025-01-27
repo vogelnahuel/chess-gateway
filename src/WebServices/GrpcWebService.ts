@@ -13,6 +13,7 @@ export abstract class GrpcWebServices {
         return new Promise((resolve, reject) => {
             this.client[method](payload, (err: grpc.ServiceError, response: R) => {
                 if (err) {
+                    console.log(err);
                     // Personaliza el error antes de rechazarlo
                     const errorDetails = {
                         message: `Error in gRPC call to method "${method}"`,

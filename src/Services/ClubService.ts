@@ -11,10 +11,6 @@ export class ClubService {
         return this.clubWebService.createClub(data);
     }
 
-    async getById(id: string): Promise<any> {
-        return this.clubWebService.getClub(id);
-    }
-
     async GetClub(): Promise<any> {
         return this.clubWebService.GetClub();
     }

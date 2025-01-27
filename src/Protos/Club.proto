@@ -4,9 +4,8 @@ package club;
 
 service ClubService {
   rpc CreateClub (CreateClubRequest) returns (CreateClubResponse);
-  rpc GetClub (GetClubRequest) returns (GetClubResponse);
+  rpc GetClubs (GetClubRequest) returns (GetClubResponse);
   rpc DeleteClub (DeleteClubRequest) returns (DeleteClubResponse);
-  rpc ListClubs (ListClubsRequest) returns (ListClubsResponse);
 }
 
 message CreateClubRequest {
@@ -29,11 +28,10 @@ message CreateClubResponse {
 }
 
 message GetClubRequest {
-  string id = 1; // UUID
 }
 
 message GetClubResponse {
-  Club club = 1;
+  repeated Club clubs = 1;
 }
 
 message UpdateClubResponse {

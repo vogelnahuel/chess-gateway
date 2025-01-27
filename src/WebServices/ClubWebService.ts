@@ -7,22 +7,22 @@ export class ClubWebService extends GrpcWebServices {
     private readonly serviceName = 'ClubService';
 
     async createClub(data: CreateClubRequest): Promise<any> {
-        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
+        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50052');
         return this.call<any, CreateClubRequest>('CreateClub', data);
     }
 
-    async getClub(id: string): Promise<any> {
-        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
-        return this.call<any, { id: string }>('GetClub', { id });
-    }
-
     async GetClub(): Promise<any[]> {
-        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
-        return this.call<any, void>('GetClub', null);
+        try {
+            this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50052');
+            return this.call<any, void>('GetClubs', {} as any);
+        } catch (error) {
+            console.log(error);
+        }
+        return [];
     }
 
     async deleteClub(id: string): Promise<any> {
-        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50051');
+        this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50052');
         return this.call<any, { id: string }>('DeleteClub', { id });
     }
 }

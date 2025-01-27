@@ -13,12 +13,6 @@ export class ClubController {
         return this.clubService.create(createClubDto);
     }
 
-    @Get(':id')
-    @HttpCode(HttpStatus.OK)
-    async getById(@Param('id') id: string) {
-        return this.clubService.getById(id);
-    }
-
     @Get()
     @HttpCode(HttpStatus.OK)
     async GetClub() {
