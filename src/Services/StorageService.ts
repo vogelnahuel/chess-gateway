@@ -1,5 +1,7 @@
+/* eslint-disable no-restricted-syntax */
 import { Injectable } from '@nestjs/common';
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { Readable } from 'stream';
 
 @Injectable()
 export class SupabaseStorageService {
@@ -9,6 +11,7 @@ export class SupabaseStorageService {
 
     constructor() {
         this.s3Client = new S3Client({
+            forcePathStyle: true,
             region: 'us-west-1', // Cambia por la región de tu bucket
             endpoint: 'https://grdxxwzlttwcpntlfide.supabase.co/storage/v1/s3', // Endpoint de Supabase
             credentials: {
@@ -28,13 +31,21 @@ export class SupabaseStorageService {
         return this.s3Client.send(command);
     }
 
-    async getFile(key: string) {
+    async getFile(key: string): Promise<Buffer> {
         const command = new GetObjectCommand({
             Bucket: this.bucketName,
             Key: key,
         });
+
         const response = await this.s3Client.send(command);
-        return response.Body as ReadableStream;
+
+        // Convertir el ReadableStream en un Buffer
+        const chunks: any[] = [];
+        const stream = response.Body as Readable;
+        for await (const chunk of stream) {
+            chunks.push(chunk);
+        }
+        return Buffer.concat(chunks);
     }
 
     async deleteFile(key: string) {

@@ -14,7 +14,8 @@ export class ClubWebService extends GrpcWebServices {
     async GetClub(): Promise<any[]> {
         try {
             this.createGrpcClientWebService('Club.proto', this.serviceName, process.env.CLUB_GRPC_URL || 'localhost:50052');
-            return this.call<any, void>('GetClubs', {} as any);
+            const response = await this.call<any, void>('GetClubs', {} as any);
+            return response.clubs;
         } catch (error) {
             console.log(error);
         }

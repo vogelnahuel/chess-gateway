@@ -70,6 +70,7 @@ message Club {
   string updated_at = 14;
   repeated Review reviews = 15;
   repeated Tournament tournaments = 16;
+  string logo = 17;
 }
 
 message Review {
