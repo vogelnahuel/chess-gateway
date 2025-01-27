@@ -18,4 +18,8 @@ export class UserService {
     async registerMedia(body: RegisterMediaDto) {
         return this._userWebService.registerMediaUser(body);
     }
+
+    async getById(id: number) {
+        return this._userWebService.getUserById(id);
+    }
 }

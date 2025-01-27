@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import Response from 'src/Helpers/Formatter/Response';
 import CreateUserDto, { RegisterDto, RegisterMediaDto } from 'src/Models/Request/UserRequest';
 import ExampleResponse from 'src/Models/Response/ExampleResponse';
@@ -25,5 +25,11 @@ export class UserController {
     @HttpCode(HttpStatus.OK)
     async registerMedia(@Body() body: RegisterMediaDto): Promise<Response<ExampleResponse>> {
         return this._userService.registerMedia(body);
+    }
+
+    @Get(':id')
+    @HttpCode(HttpStatus.OK)
+    async getById(@Param('id') id: number) {
+        return this._userService.getById(id);
     }
 }
