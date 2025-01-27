@@ -15,8 +15,8 @@ export class ClubService {
         return this.clubWebService.getClub(id);
     }
 
-    async list(filters: { city?: string; province?: string }): Promise<any> {
-        return this.clubWebService.listClubs(filters.city, filters.province);
+    async GetClub(): Promise<any> {
+        return this.clubWebService.GetClub();
     }
 
     async delete(id: string): Promise<any> {

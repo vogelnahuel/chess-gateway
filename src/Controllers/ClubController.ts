@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import CreateClubRequest from 'src/Models/Request/ClubRequest';
 import { ClubService } from '../Services/ClubService';
 
@@ -21,8 +21,8 @@ export class ClubController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    async list(@Query('city') city?: string, @Query('province') province?: string) {
-        return this.clubService.list({ city, province });
+    async GetClub() {
+        return this.clubService.GetClub();
     }
 
     @Delete(':id')

@@ -5,7 +5,6 @@ package club;
 service ClubService {
   rpc CreateClub (CreateClubRequest) returns (CreateClubResponse);
   rpc GetClub (GetClubRequest) returns (GetClubResponse);
-  rpc UpdateClub (UpdateClubRequest) returns (UpdateClubResponse);
   rpc DeleteClub (DeleteClubRequest) returns (DeleteClubResponse);
   rpc ListClubs (ListClubsRequest) returns (ListClubsResponse);
 }
@@ -35,21 +34,6 @@ message GetClubRequest {
 
 message GetClubResponse {
   Club club = 1;
-}
-
-message UpdateClubRequest {
-  string id = 1; // UUID
-  string name = 2;
-  string address = 3;
-  string city = 4;
-  string province = 5;
-  string phone = 6;
-  string email = 7;
-  string website = 8;
-  bool is_federated = 9;
-  string description = 10;
-  string opening_hours = 11;
-  string map_location = 12;
 }
 
 message UpdateClubResponse {
