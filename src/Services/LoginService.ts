@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import LoginRequest from 'src/Models/Request/LoginRequest';
-import { LoginWebService } from 'src/WebServices/LoginWebService';
+import LoginRequest from '../Models/Request/LoginRequest';
+import { LoginWebService } from '../WebServices/LoginWebService';
 
 @Injectable()
 export class LoginService {

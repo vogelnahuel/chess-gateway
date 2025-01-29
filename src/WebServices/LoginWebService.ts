@@ -1,5 +1,5 @@
-import LoginRequest from 'src/Models/Request/LoginRequest';
 import { BadGatewayException } from '@nestjs/common';
+import LoginRequest from '../Models/Request/LoginRequest';
 import { GrpcWebServices } from './GrpcWebService';
 
 export class LoginWebService extends GrpcWebServices {

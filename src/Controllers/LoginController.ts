@@ -1,8 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import Response from 'src/Helpers/Formatter/Response';
-import LoginRequest from 'src/Models/Request/LoginRequest';
-import ExampleResponse from 'src/Models/Response/ExampleResponse';
-import { LoginService } from 'src/Services/LoginService';
+import Response from '../Helpers/Formatter/Response';
+import LoginRequest from '../Models/Request/LoginRequest';
+import ExampleResponse from '../Models/Response/ExampleResponse';
+import { LoginService } from '../Services/LoginService';
 
 @Controller('login')
 export class LoginController {
